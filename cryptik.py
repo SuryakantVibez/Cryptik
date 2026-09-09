@@ -62,17 +62,17 @@ def decrypt(inputText):
                 print(selected, "is the", j, "th key index, so", characters[j])
                 break
         output = output + characters[j]
-    print("Decrypted text: ", output)
+    print("\nDecrypted text: ", output)
 
 def keyFunction():
-    task = int(input("1. Output current key \n2. Enter new key \n3. Generate new key \n(1,2,3): "))
+    task = input("\nKey function menu\n-----------------\n1. Output current key \n2. Enter new key \n3. Generate new key \n(1,2,3): ")
     output = ""
-    if task == 1:
+    if task == "1" or task == "o":
         for i in range (0, len(key), 1):
             output = output + key[i]
-        print("Encryption key:", output)
+        print("\nEncryption key:", output)
 
-    elif task == 2:
+    elif task == "2" or task == "e":
         key.clear()
         newKey = input("New key: ")
         selected = 0
@@ -80,7 +80,7 @@ def keyFunction():
             selected = newKey[i] + newKey[i+1]
             key.append(selected)
 
-    elif task == 3:
+    elif task == "3" or task == "g":
         genList = []
         newKey = ""
         while len(genList) < 95:
@@ -89,17 +89,25 @@ def keyFunction():
                 genList.append(charGenTemp)
         for i in range (0, len(genList), 1):
             newKey = newKey + genList[i]
-        print("New encryption key:", newKey)
+        print("\nNew encryption key:", newKey)
+
+        setKey = input("\nSet this as your key?\n1. Yes\n2. No\n(1,2): ").lower()
+        if setKey == "y" or setKey == "1":
+            key.clear()
+            selected = 0
+            for i in range (0, (len(newKey)),2):
+                selected = newKey[i] + newKey[i+1]
+                key.append(selected)
 
 notZero = 0
 while notZero == 0:
-    task = input("1. Encrypt\n2. Decrypt\n3. Key functions\n(1,2,3): ").lower()
+    task = input("\nHome menu\n---------\n1. Encrypt\n2. Decrypt\n3. Key functions\n(1,2,3): ").lower()
 
-    if task == "1":
+    if task == "1" or task == "e":
         encrypt(input("Enter text: "))
-    elif task == "2":
+    elif task == "2" or task == "d":
         decrypt(input("Enter text: "))
-    elif task == "3":
+    elif task == "3" or task == "k":
         keyFunction()
     else:
         print("Invalid input")
